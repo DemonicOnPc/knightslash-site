@@ -28,7 +28,6 @@
             color: white;
         }
 
-        /* Standard TM Styling (Larger) */
         sup {
             font-size: 0.6em; 
             vertical-align: super;
@@ -36,13 +35,11 @@
             color: rgba(255,255,255,0.7);
         }
 
-        /* Tiny TM Styling specifically for the Hero Title */
         .hero-content h1 sup {
             font-size: 0.35em; 
             color: rgba(255,255,255,0.5);
         }
 
-        /* STATIC HEADER */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -78,12 +75,11 @@
         }
         .nav-links a:hover { color: var(--ichor-red); }
 
-        /* STATIC FOOTER */
         footer {
-            position: fixed;
-            bottom: 0; width: 100%;
+            position: relative;
+            width: 100%;
             background: #000;
-            padding: 15px;
+            padding: 30px;
             text-align: center;
             border-top: 1px solid #111;
             font-size: 0.7rem;
@@ -111,7 +107,6 @@
             text-align: center;
         }
 
-        /* HERO SECTION */
         #home {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
                         url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000') no-repeat center center/cover;
@@ -121,7 +116,6 @@
         .hero-content h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); margin: 0; letter-spacing: 15px; text-transform: uppercase; color: #fff; }
         .tagline { color: var(--ichor-red); font-size: 1.1rem; letter-spacing: 5px; font-weight: bold; margin-bottom: 40px; text-transform: uppercase; }
 
-        /* THE GAME SECTION */
         #the-game { background: #0a0a0a; }
         .pillars {
             display: grid;
@@ -141,7 +135,6 @@
         .pillar h3 { color: #fff; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; margin-top: 0; }
         .pillar p { color: #888; line-height: 1.6; font-size: 0.9rem; }
 
-        /* THE WORLD (PARALLAX EFFECT) */
         .parallax {
             background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2000');
             background-attachment: fixed;
@@ -164,35 +157,55 @@
             max-width: 700px;
         }
 
-        /* MEDIA GRID */
-        #media { background: #050505; }
-        .media-grid {
+        /* ROADMAP STYLING */
+        #roadmap { background: #050505; }
+        .roadmap-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
             max-width: 1100px;
             width: 100%;
         }
-        .media-item {
-            aspect-ratio: 16/9;
-            background: #111;
+        .roadmap-category {
+            background: #0d0d0d;
             border: 1px solid #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+        .roadmap-category:hover { border-color: #444; }
+        .roadmap-category h3 { 
+            color: var(--ichor-red); 
+            font-size: 0.9rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            margin-bottom: 20px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+        }
+        .roadmap-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        .roadmap-list li {
+            color: #777;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
+        }
+        .roadmap-list li::before {
+            content: "•";
+            color: var(--ichor-red);
+            position: absolute;
+            left: 0;
         }
 
-        /* ABOUT US */
         #about { background: #0a0a0a; }
         .about-container { max-width: 800px; text-align: center; }
         .about-container p { line-height: 1.8; color: #999; font-size: 1rem; }
 
-        /* BUTTONS */
         .btn-group { display: flex; gap: 20px; justify-content: center; }
         .btn { padding: 14px 30px; text-transform: uppercase; text-decoration: none; letter-spacing: 2px; font-weight: bold; transition: 0.4s; border: 1px solid #333; color: white; font-size: 0.8rem; }
         .btn-main { background: var(--ichor-red); border-color: var(--ichor-red); }
@@ -211,7 +224,7 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#the-game">The Game</a>
-            <a href="#media">Media</a>
+            <a href="#roadmap">Roadmap</a>
             <a href="#about">About Us</a>
             <a href="https://x.com/KnightSlash_Dev" target="_blank">News</a>
         </div>
@@ -223,28 +236,40 @@
     <section id="home">
         <div class="hero-content">
             <h1>VESSELS OF ICHOR<sup>™</sup></h1>
-            <p class="tagline">Protect the Anchor. Survive the Tide.</p>
+            <p class="tagline">Forge Your Legend in Ichor. Become the Weapon the Gods Intended.</p>
             <div class="btn-group">
                 <a href="https://discord.gg/KJRdmGeHEV" target="_blank" class="btn btn-main">Join the Discord</a>
-                <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="btn btn-alt">Watch Teaser</a>
+                <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="btn btn-alt">Watch Teaser - coming soon</a>
             </div>
         </div>
     </section>
 
     <section id="the-game">
-        <h2 class="section-title">The Game</h2>
+        <h2 class="section-title">Core Gameplay</h2>
         <div class="pillars">
             <div class="pillar">
                 <h3>The Solar Ward</h3>
-                <p>The heat of Helios provides a two-minute window of safety. Rally survivors, harvest resources, and fortify the World-Anchor before the light fades.</p>
+                <p>Helios grants a two-minute window of divine safety. Direct survivors to harvest vital resources and fortify the World-Anchor’s defenses before the light shatters.</p>
             </div>
             <div class="pillar">
                 <h3>The High Tide</h3>
-                <p>Acheron's servants rise from the surf as the sea inhales. Command massive armies in a top-down struggle against the rising shadows.</p>
+                <p>As the sea inhales, Acheron’s servants rise. Lead massive-scale RTS battalions in a top-down struggle against thousands of procedural entities across crumbling peaks.</p>
+            </div>
+            <div class="pillar">
+                <h3>Divine Wrath</h3>
+                <p>Wield devastating Godpowers to tip the scales. Channel the Powers of Helios to unleash Meteor Storms and celestial strikes to incinerate entire legions of the Rising Tide.</p>
             </div>
             <div class="pillar">
                 <h3>The Eternal Forge</h3>
-                <p>Death is not the end. Offer freed Souls to the Radiant Three to permanently strengthen your Ichor-form for the next Ascension.</p>
+                <p>Death is merely a recall to the Sun-Citadel. Offer freed Souls to the Radiant Three to permanently evolve your Ichor-form with enhanced traits for the next Island.</p>
+            </div>
+            <div class="pillar">
+                <h3>Vessel Ranking</h3>
+                <p>Your deeds are etched in Helios. Compete for dominance on the global leaderboards by freeing the highest tally of Souls before the island is consumed.</p>
+            </div>
+			<div class="pillar">
+                <h3>Defeat a God</h3>
+                <p>Break the cycle. Slay Acheron’s lieutenants to open the path to the Underworld’s heart. Only by defeating the God of the Tide can you truly save the world from the abyss.</p>
             </div>
         </div>
     </section>
@@ -252,24 +277,82 @@
     <div class="parallax">
         <div class="parallax-overlay">
             <h2 style="color: var(--ichor-red); letter-spacing: 5px; text-transform: uppercase;">A Broken Paradise</h2>
-            <p style="color: #ccc; line-height: 1.6;">Once the continent of Elysium, now only the highest peaks remain—rising like broken teeth above a violent, endless ocean.</p>
+            <p style="color: #eee; line-height: 1.8; font-size: 1.1rem; margin-bottom: 20px;">
+                Elysium has fallen. The ancestral continent is gone, swallowed by a relentless, primordial tide. All that remains of a golden age are the highest peaks—shattered islands rising like broken teeth above a violent, endless ocean.
+            </p>
+            <p style="color: #aaa; line-height: 1.6; font-style: italic; border-left: 2px solid var(--ichor-red); padding-left: 20px; text-align: left; max-width: 600px; margin: 0 auto;">
+                "The World-Anchors are the only things keeping these final stones from slipping into the abyss. If the Anchor shatters, the island drowns. And Acheron is patient."
+            </p>
+            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <div style="text-align: center;">
+                    <span style="display: block; color: var(--ichor-red); font-weight: bold; letter-spacing: 2px;">THE DEPTHS</span>
+                    <span style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Acheron's Reach</span>
+                </div>
+                <div style="text-align: center;">
+                    <span style="display: block; color: var(--ichor-red); font-weight: bold; letter-spacing: 2px;">THE PEAKS</span>
+                    <span style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Final Sanctuary</span>
+                </div>
+                <div style="text-align: center;">
+                    <span style="display: block; color: var(--ichor-red); font-weight: bold; letter-spacing: 2px;">THE ANCHOR</span>
+                    <span style="font-size: 0.7rem; color: #666; text-transform: uppercase;">World-Binding</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <section id="media">
-        <h2 class="section-title">Media Gallery</h2>
-        <div class="media-grid">
-            <div class="media-item">NavCore Unit Stress Test</div>
-            <div class="media-item">Movement Demonstration</div>
-            <div class="media-item">World Generation Render</div>
+    <section id="roadmap">
+        <h2 class="section-title">Development Roadmap</h2>
+        <div class="roadmap-grid">
+            
+            <div class="roadmap-category">
+                <h3>Core Architecture</h3>
+                <ul class="roadmap-list">
+                    <li>Unit Movement & Formations</li>
+                    <li>Local Avoidance Systems</li>
+                    <li>Hostile Unit AI Brain</li>
+                    <li>Worldgen V2 Improvements</li>
+                    <li>Better Performance & Optimization</li>
+                </ul>
+            </div>
+
+            <div class="roadmap-category">
+                <h3>Gameplay Systems</h3>
+                <ul class="roadmap-list">
+                    <li>Ascension System (In-match Aging)</li>
+                    <li>Horde Movement and Intent</li>
+                    <li>Shrines, Relics, & Chest Spawns</li>
+                    <li>Godpowers & Divine Abilities</li>
+                    <li>More Unit Varieties</li>
+                </ul>
+            </div>
+
+            <div class="roadmap-category">
+                <h3>Meta & Vessel</h3>
+                <ul class="roadmap-list">
+                    <li>The Eternal Forge</li>
+                    <li>Transcendence Vessel Upgrades</li>
+                    <li>Character Creation</li>
+                    <li>Leaderboard Scoring</li>
+                    <li>Main Menu & UI</li>
+                </ul>
+            </div>
+
         </div>
+        <p style="margin-top: 40px; color: #555; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Currently targeting V1.0 Alpha Test</p>
     </section>
 
     <section id="about">
-        <h2 class="section-title">Our Studio</h2>
+        <h2 class="section-title">KnightSlash Studios</h2>
         <div class="about-container">
-            <p>KnightSlash Studios<sup>™</sup> is a solo independent developer house dedicated to reviving the depth of classic RTS games with modern Roguelike intensity.</p>
-            <p>Our flagship title, <strong>Vessels of Ichor<sup>™</sup></strong>, is built on custom architecture designed to handle thousands of units in real-time simulation.</p>
+            <p>KnightSlash Studios<sup>™</sup> is an independent development house led by a principal developer with over a decade of cross-platform technical experience. Our foundation is built upon ten years of iterative design and systems architecture, with deep expertise spanning <strong>Level Design, Project Management,</strong> and low-level systems programming in <strong>C, Java, and Rust.</strong></p>
+            
+            <p>The studio’s technical pedigree is rooted in extensive contributions to the indie and open-source landscapes. This includes professional asset artistry for the Voxel-RPG-MMO <strong>Veloren</strong>, alongside the development of complex systems-modifications for high-fidelity titles including <strong>Arma 3, DayZ, Stonehearth, Minecraft,</strong> and <strong>Stellaris.</strong></p>
+            
+            <p>Driven by the gold-standard mechanics of the <em>Age of Empires</em> series and the high-performance competitive frameworks of <em>Warcraft</em> and <em>Starcraft</em>, KnightSlash Studios was established to bridge the gap between traditional RTS depth and modern computational scalability.</p>
+
+            <p>Our flagship title, <strong>Vessels of Ichor<sup>™</sup></strong>, serves as the debut of our proprietary <strong>NavCore</strong> architecture. This custom-built simulation stack utilizes DOTS-first principles to facilitate real-time management of thousands of agents, delivering a performance-tier previously reserved for AAA-scale strategy titles.</p>
+            
+            <p style="border-top: 1px solid #222; padding-top: 25px; color: #666; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;">Technical Excellence • Strategic Heritage • Solo-Driven Innovation</p>
         </div>
     </section>
 
