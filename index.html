@@ -34,18 +34,25 @@
         p { 
             font-size: 1rem; 
             letter-spacing: 3px; 
-            color: #B22222; /* Slightly brighter red for better readability */
+            color: #B22222; 
             font-weight: bold; 
+            margin-bottom: 30px;
+        }
+        .links-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .social { 
-            margin-top: 30px; 
             color: #666; 
             text-decoration: none; 
             font-size: 0.8rem; 
             border: 1px solid #222; 
-            padding: 8px 15px; 
+            padding: 10px 20px; 
             transition: 0.5s; 
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
         .social:hover { 
             color: #fff; 
@@ -57,6 +64,10 @@
 <body>
     <h1>KnightSlash Studios</h1>
     <p>VESSELS OF ICHOR — IN DEVELOPMENT</p>
-    <a href="https://x.com/KnightSlash_Dev" class="social">FOLLOW THE JOURNEY @KNIGHTSLASH_DEV</a>
+    
+    <div class="links-container">
+        <a href="https://x.com/KnightSlash_Dev" target="_blank" class="social">X / Twitter</a>
+        <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="social">YouTube</a>
+    </div>
 </body>
 </html>
