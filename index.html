@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KnightSlash Studios | Vessels of Ichor</title>
+    <title>KnightSlash Studios™ | Vessels of Ichor™</title>
     <style>
         :root {
             --ichor-red: #B22222;
@@ -11,7 +11,6 @@
             --nav-bg: rgba(10, 10, 10, 0.98);
         }
 
-        /* Smooth Scrolling */
         html { scroll-behavior: smooth; }
 
         body, html {
@@ -19,6 +18,20 @@
             font-family: 'Times New Roman', serif;
             background-color: var(--dark);
             color: white;
+        }
+
+        /* Standard TM Styling (Larger) */
+        sup {
+            font-size: 0.6em; 
+            vertical-align: super;
+            margin-left: 2px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Tiny TM Styling specifically for the Hero Title */
+        .hero-content h1 sup {
+            font-size: 0.35em; 
+            color: rgba(255,255,255,0.5);
         }
 
         /* STATIC HEADER */
@@ -35,11 +48,11 @@
             z-index: 1000;
         }
 
-        .logo-box { font-weight: bold; letter-spacing: 4px; text-transform: uppercase; }
+        .logo-box { font-weight: bold; letter-spacing: 4px; text-transform: uppercase; font-size: 1rem; }
         .nav-links { display: flex; gap: 30px; }
         .nav-links a {
             color: #aaa; text-decoration: none; text-transform: uppercase;
-            font-size: 0.85rem; letter-spacing: 2px; font-weight: bold; transition: 0.3s;
+            font-size: 0.8rem; letter-spacing: 2px; font-weight: bold; transition: 0.3s;
         }
         .nav-links a:hover { color: var(--ichor-red); }
 
@@ -51,20 +64,29 @@
             padding: 15px;
             text-align: center;
             border-top: 1px solid #111;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #555;
             letter-spacing: 2px;
             z-index: 1000;
         }
 
-        /* SCROLLABLE CONTENT SECTIONS */
         section {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 100px 20px; /* Space for fixed bars */
+            padding: 120px 20px;
             box-sizing: border-box;
+        }
+
+        .section-title {
+            color: var(--ichor-red);
+            font-size: 2.2rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            text-align: center;
         }
 
         /* HERO SECTION */
@@ -73,66 +95,160 @@
                         url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000') no-repeat center center/cover;
             text-align: center;
         }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); margin: 0; letter-spacing: 15px; text-transform: uppercase; color: #fff; }
+        .tagline { color: var(--ichor-red); font-size: 1.1rem; letter-spacing: 5px; font-weight: bold; margin-bottom: 40px; text-transform: uppercase; }
 
-        .hero-content h1 { font-size: clamp(3rem, 10vw, 6rem); margin: 0; letter-spacing: 15px; text-transform: uppercase; color: #fff; }
-        .tagline { color: var(--ichor-red); font-size: 1.2rem; letter-spacing: 5px; font-weight: bold; margin-bottom: 40px; text-transform: uppercase; }
+        /* THE GAME SECTION */
+        #the-game { background: #0a0a0a; }
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            width: 100%;
+        }
+        .pillar {
+            background: rgba(255,255,255,0.02);
+            padding: 40px 25px;
+            border: 1px solid #222;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .pillar:hover { border-color: var(--ichor-red); background: rgba(178, 34, 34, 0.05); }
+        .pillar h3 { color: #fff; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; margin-top: 0; }
+        .pillar p { color: #888; line-height: 1.6; font-size: 0.9rem; }
 
-        /* ABOUT SECTION */
-        #about {
-            background: #0a0a0a;
-            flex-direction: column;
-            text-align: left;
+        /* THE WORLD (PARALLAX EFFECT) */
+        .parallax {
+            background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2000');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 100px #000;
         }
 
-        .about-container { max-width: 800px; }
-        .about-container h2 { color: var(--ichor-red); font-size: 2.5rem; letter-spacing: 5px; text-transform: uppercase; }
-        .about-container p { line-height: 1.8; color: #ccc; font-size: 1.1rem; }
+        .parallax-overlay {
+            background: rgba(0,0,0,0.7);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(178, 34, 34, 0.3);
+            max-width: 700px;
+        }
+
+        /* MEDIA GRID */
+        #media { background: #050505; }
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            width: 100%;
+        }
+        .media-item {
+            aspect-ratio: 16/9;
+            background: #111;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        /* ABOUT US */
+        #about { background: #0a0a0a; }
+        .about-container { max-width: 800px; text-align: center; }
+        .about-container p { line-height: 1.8; color: #999; font-size: 1rem; }
 
         /* BUTTONS */
         .btn-group { display: flex; gap: 20px; justify-content: center; }
-        .btn { padding: 15px 35px; text-transform: uppercase; text-decoration: none; letter-spacing: 2px; font-weight: bold; transition: 0.4s; border: 1px solid #444; color: white; }
+        .btn { padding: 14px 30px; text-transform: uppercase; text-decoration: none; letter-spacing: 2px; font-weight: bold; transition: 0.4s; border: 1px solid #333; color: white; font-size: 0.8rem; }
         .btn-main { background: var(--ichor-red); border-color: var(--ichor-red); }
         .btn-main:hover { background: #8b0000; box-shadow: 0 0 20px rgba(178, 34, 34, 0.4); }
+        .btn-alt:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-box">KNIGHTSLASH STUDIOS</div>
+        <div class="logo-box">KNIGHTSLASH STUDIOS<sup>™</sup></div>
         <div class="nav-links">
-            <a href="#home">The Game</a>
-            <a href="#">Shop</a>
-            <a href="https://x.com/KnightSlash_Dev" target="_blank">News</a>
-            <a href="#">Media</a>
+            <a href="#home">Home</a>
+            <a href="#the-game">The Game</a>
+            <a href="#media">Media</a>
             <a href="#about">About Us</a>
+            <a href="https://x.com/KnightSlash_Dev" target="_blank">News</a>
         </div>
         <div class="contact-box">
-            <a href="mailto:knightslash.studios@gmail.com" style="color:white; text-decoration:none; font-size:0.8rem; border:1px solid #444; padding:8px 15px;">SUPPORT</a>
+            <a href="mailto:knightslash.studios@gmail.com" style="color:white; text-decoration:none; font-size:0.7rem; border:1px solid #333; padding:8px 15px; font-weight: bold; letter-spacing: 1px;">SUPPORT</a>
         </div>
     </nav>
 
     <section id="home">
         <div class="hero-content">
-            <h1>VESSELS OF ICHOR</h1>
+            <h1>VESSELS OF ICHOR<sup>™</sup></h1>
             <p class="tagline">Protect the Anchor. Survive the Tide.</p>
             <div class="btn-group">
                 <a href="https://discord.gg/KJRdmGeHEV" target="_blank" class="btn btn-main">Join the Discord</a>
-                <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="btn">Watch Teaser</a>
+                <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="btn btn-alt">Watch Teaser</a>
             </div>
         </div>
     </section>
 
+    <section id="the-game">
+        <h2 class="section-title">The Game</h2>
+        <div class="pillars">
+            <div class="pillar">
+                <h3>The Solar Ward</h3>
+                <p>The heat of Helios provides a two-minute window of safety. Rally survivors, harvest resources, and fortify the World-Anchor before the light fades.</p>
+            </div>
+            <div class="pillar">
+                <h3>The High Tide</h3>
+                <p>Acheron's servants rise from the surf as the sea inhales. Command massive armies in a top-down struggle against the rising shadows.</p>
+            </div>
+            <div class="pillar">
+                <h3>The Eternal Forge</h3>
+                <p>Death is not the end. Offer freed Souls to the Radiant Three to permanently strengthen your Ichor-form for the next Ascension.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="parallax">
+        <div class="parallax-overlay">
+            <h2 style="color: var(--ichor-red); letter-spacing: 5px; text-transform: uppercase;">A Broken Paradise</h2>
+            <p style="color: #ccc; line-height: 1.6;">Once the continent of Elysium, now only the highest peaks remain—rising like broken teeth above a violent, endless ocean.</p>
+        </div>
+    </div>
+
+    <section id="media">
+        <h2 class="section-title">Media Gallery</h2>
+        <div class="media-grid">
+            <div class="media-item">NavCore Unit Stress Test</div>
+            <div class="media-item">Movement Demonstration</div>
+            <div class="media-item">World Generation Render</div>
+        </div>
+    </section>
+
     <section id="about">
+        <h2 class="section-title">Our Studio</h2>
         <div class="about-container">
-            <h2>The Vision</h2>
-            <p>KnightSlash Studios is a solo independent developer house dedicated to reviving the depth of classic RTS games with modern Roguelike intensity.</p>
-            <p>Our flagship title, <strong>Vessels of Ichor</strong>, is built on a custom NavCore architecture designed to handle thousands of units simultaneously. We believe in high-stakes gameplay where every second of the Solar Ward counts before the High Tide begins.</p>
+            <p>KnightSlash Studios<sup>™</sup> is a solo independent developer house dedicated to reviving the depth of classic RTS games with modern Roguelike intensity.</p>
+            <p>Our flagship title, <strong>Vessels of Ichor<sup>™</sup></strong>, is built on custom architecture designed to handle thousands of units in real-time simulation.</p>
         </div>
     </section>
 
     <footer>
-        &copy; 2026 KNIGHTSLASH STUDIOS. ALL RIGHTS RESERVED.
+        &copy; 2026 KNIGHTSLASH STUDIOS<sup>™</sup>. ALL RIGHTS RESERVED.
     </footer>
 
 </body>
