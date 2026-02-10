@@ -3,75 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KnightSlash Studios</title>
-    
-    <meta name="description" content="Official home of KnightSlash Studios. Currently developing Vessels of Ichor.">
-    <meta property="og:title" content="KnightSlash Studios">
-    <meta property="og:description" content="Vessels of Ichor — In Development.">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@KnightSlash_Dev">
-
+    <title>KnightSlash Studios | Vessels of Ichor</title>
     <style>
-        body { 
-            background-color: #050505; 
-            color: #d1d1d1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-            font-family: 'Times New Roman', serif; 
-            text-align: center; 
+        :root {
+            --ichor-red: #B22222;
+            --gold: #D4AF37;
+            --dark: #050505;
+            --nav-bg: rgba(10, 10, 10, 0.95);
         }
-        h1 { 
-            font-size: 2.5rem; 
-            letter-spacing: 8px; 
-            text-transform: uppercase; 
-            margin-bottom: 5px; 
-            color: #fff; 
-        }
-        p { 
-            font-size: 1rem; 
-            letter-spacing: 3px; 
-            color: #B22222; 
-            font-weight: bold; 
-            margin-bottom: 30px;
-        }
-        .links-container {
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Times New Roman', serif;
+            background-color: var(--dark);
+            color: white;
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 600px; /* Keeps the boxes from spreading too far on wide screens */
+            flex-direction: column;
         }
-        .social { 
-            color: #666; 
-            text-decoration: none; 
-            font-size: 0.8rem; 
-            border: 1px solid #222; 
-            padding: 10px 20px; 
-            transition: 0.5s; 
-            letter-spacing: 2px;
+
+        /* Top Navigation - Separated Style */
+        nav {
+            width: 100%;
+            background: var(--nav-bg);
+            border-bottom: 2px solid #222; /* Clean separation line */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+
+        .logo-box {
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: white;
             text-transform: uppercase;
-            min-width: 120px; /* Makes the boxes a consistent size */
         }
-        .social:hover { 
-            color: #fff; 
-            border-color: #B22222; 
-            background: #B2222211; 
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--ichor-red);
+            text-shadow: 0 0 8px var(--ichor-red);
+        }
+
+        /* Hero / Main Content Area */
+        .hero {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Placeholder background - swap with your art later */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            margin: 0;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(178, 34, 34, 0.6);
+        }
+
+        .tagline {
+            color: var(--ichor-red);
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        /* Functional Buttons */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: bold;
+            transition: 0.4s;
+            border: 1px solid #444;
+        }
+
+        .btn-main {
+            background: var(--ichor-red);
+            color: white;
+            border-color: var(--ichor-red);
+        }
+
+        .btn-main:hover {
+            background: #8b0000;
+            box-shadow: 0 0 20px rgba(178, 34, 34, 0.4);
+        }
+
+        .btn-alt:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Bottom Footer */
+        footer {
+            background: #000;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid #111;
+            font-size: 0.75rem;
+            color: #555;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
-    <h1>KnightSlash Studios</h1>
-    <p>VESSELS OF ICHOR — IN DEVELOPMENT</p>
-    
-    <div class="links-container">
-        <a href="https://x.com/KnightSlash_Dev" target="_blank" class="social">X / Twitter</a>
-        <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="social">YouTube</a>
-        <a href="https://discord.gg/KJRdmGeHEV" target="_blank" class="social">Discord</a>
-        <a href="mailto:knightslash.studios@gmail.com" class="social">Contact</a>
-    </div>
+
+    <nav>
+        <div class="logo-box">KNIGHTSLASH STUDIOS</div>
+        
+        <div class="nav-links">
+            <a href="#">The Game</a>
+            <a href="#">Shop</a>
+            <a href="#">News</a>
+            <a href="#">Media</a>
+            <a href="#">About Us</a>
+        </div>
+
+        <div class="contact-box">
+            <a href="mailto:knightslash.studios@gmail.com" style="color:white; text-decoration:none; font-size:0.8rem; border:1px solid #444; padding:8px 15px;">SUPPORT</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>VESSELS OF ICHOR</h1>
+            <p class="tagline">Protect the Anchor. Survive the Tide.</p>
+            
+            <div class="btn-group">
+                <a href="https://discord.gg/KJRdmGeHEV" target="_blank" class="btn btn-main">Join the Discord</a>
+                <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" class="btn btn-alt">Watch Teaser</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 KNIGHTSLASH STUDIOS. ALL RIGHTS RESERVED.
+    </footer>
+
 </body>
 </html>
