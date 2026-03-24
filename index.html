@@ -16,6 +16,7 @@
             --Ichorous-red: #B22222;
             --dark: #050505;
             --nav-bg: rgba(10, 10, 10, 0.98);
+            --success-green: #2ecc71;
         }
 
         html { scroll-behavior: smooth; }
@@ -368,8 +369,16 @@
         .stage-subtitle { font-size: 0.75rem; color: #888; font-style: italic; margin-bottom: 15px; display: block; }
 
         .roadmap-list { list-style: none; padding: 0; margin: 0; }
-        .roadmap-list li { color: #666; font-size: 0.75rem; margin-bottom: 8px; padding-left: 15px; position: relative; }
+        .roadmap-list li { color: #888; font-size: 0.75rem; margin-bottom: 8px; padding-left: 20px; position: relative; }
         .roadmap-list li::before { content: "•"; color: var(--Ichorous-red); position: absolute; left: 0; }
+
+        /* GREEN CHECKMARK OVERRIDE */
+        .roadmap-list li.done { color: #555; } /* Completed items text */
+        .roadmap-list li.done::before { 
+            content: "✓"; 
+            color: var(--success-green); 
+            font-weight: bold; 
+        }
 
         .cardinal-connector {
             position: absolute;
@@ -533,14 +542,14 @@
                         <h3>Foundations</h3>
                         <span class="stage-subtitle">Core Architecture & Engine Foundation</span>
                         <ul class="roadmap-list">
-                            <li>✓ Deterministic Island Generation</li>
-                            <li>✓ Resource Gathering & Management</li>
-                            <li>✓ Player and Hostile AI Architecture</li>
-                            <li>✓ Building System</li>
-                            <li>✓ Unit Production System</li>
-                            <li>✓ Basic Melee & Ranged Combat Systems</li>
-                            <li>✓ Selecton/Command Controller</li>
-                            <li>✓ Unit Local Avoidance Systems</li>
+                            <li class="done">Deterministic Island Generation</li>
+                            <li class="done">Resource Gathering & Management</li>
+                            <li class="done">Player and Hostile AI Architecture</li>
+                            <li class="done">Building System</li>
+                            <li class="done">Unit Production System</li>
+                            <li class="done">Basic Melee & Ranged Combat Systems</li>
+                            <li class="done">Selection/Command Controller</li>
+                            <li class="done">Unit Local Avoidance Systems</li>
                         </ul>
                     </div>
                     <div class="cardinal-connector"></div>
@@ -557,13 +566,13 @@
                         <h3>Core</h3>
                         <span class="stage-subtitle">Dynamic Gameplay Systems</span>
                         <ul class="roadmap-list">
-                            <li>✓ Fog of War</li>
-                            <li>✓ Day & Night Cycle</li>
-                            <li>✓ Ascension System (Match Progression)</li>
-                            <li>✓ Combat and ability Stats</li>
-                            <li>✓ Hostile Waves & Tiers</li>
-                            <li>✓ Minimap System</li>
-                            <li>✓ UI & Main Menu</li>
+                            <li class="done">Fog of War</li>
+                            <li class="done">Day & Night Cycle</li>
+                            <li class="done">Ascension System (Match Progression)</li>
+                            <li class="done">Combat and ability Stats</li>
+                            <li class="done">Hostile Waves & Tiers</li>
+                            <li class="done">Minimap System</li>
+                            <li class="done">UI & Main Menu</li>
                         </ul>
                     </div>
                 </div>
@@ -574,11 +583,11 @@
                         <h3>Progression</h3>
                         <span class="stage-subtitle">Meta-Progression</span>
                         <ul class="roadmap-list">
-                            <li>✓ Transcendence Upgrades (Permanent Progression)</li>
-                            <li>✓ EXP & Leveling System</li>
-                            <li>✓ Character Customization</li>
-                            <li>✓ Character Equipment and Weapons</li>
-                            <li>✓ Shrines & Chest Spawns</li>
+                            <li class="done">Transcendence Upgrades (Permanent Progression)</li>
+                            <li class="done">EXP & Leveling System</li>
+                            <li class="done">Character Customization</li>
+                            <li class="done">Character Equipment and Weapons</li>
+                            <li class="done">Shrines & Chest Spawns</li>
                             <li>Godpowers</li>
                             <li>Elite/Armoured/Boss Hostile Units</li>
                             <li>Leaderboard Integration</li>
@@ -591,7 +600,7 @@
 
                 <div class="stage-item bottom">
                     <div class="timeline-node"></div>
-                    <span class="stage-date">Q3 2026</span>
+                    <span class="stage-date">Q4 2026</span>
                     <div class="cardinal-connector"></div>
                     <div class="stage-box">
                         <span class="verse-tag">Phase IV</span>
@@ -599,10 +608,9 @@
                         <span class="stage-subtitle">Expansion, Progression & More</span>
                         <ul class="roadmap-list">
                             <li>More Unit Types (Player and Hostile)</li>
-                            <li>Polish Combat</li>
-                            <li>Polish Movement and Pathfinding</li>
+                            <li>AI Combat Polish</li>
+                            <li>AI Movement and Pathfinding Polish</li>
                             <li>New Biome Archetypes</li>
-                            <li>AI Movement Polish</li>
                             <li>Animations</li>
                             <li>SFX & Music</li>
                             <li>UI Rework & Polish</li>
@@ -624,7 +632,7 @@
                         </ul>
                     </div>
                     <div class="cardinal-connector"></div>
-                    <span class="stage-date">Q4 2026</span>
+                    <span class="stage-date">Q1 2027</span>
                     <div class="timeline-node"></div>
                 </div>
 
