@@ -11,6 +11,8 @@
     <meta name="description" content="Official site of KnightSlash Studios. Defend the World-Anchor in Vessels of Ichorous™, a mass-scale RTS Roguelike survival game. Solo indie developer reviving classic RTS depth.">
     <meta name="keywords" content="KnightSlash Studios, Vessels of Ichorous, RTS, Roguelike, Indie Games, PC Games, Solo Dev">
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root {
             --Ichorous-red: #B22222;
@@ -230,7 +232,6 @@
             box-shadow: 0 0 15px var(--Ichorous-red);
         }
 
-        /* Highlight Logic for Dates and Lines */
         .timeline-stages:has(.stage-item:nth-child(1):hover) ~ .timeline-main-line::after { transform: translateX(-90%); }
         .timeline-stages:has(.stage-item:nth-child(2):hover) ~ .timeline-main-line::after { transform: translateX(-70%); }
         .timeline-stages:has(.stage-item:nth-child(3):hover) ~ .timeline-main-line::after { transform: translateX(-50%); }
@@ -308,7 +309,6 @@
 		.stage-item.top .stage-date { bottom: 42%; margin-bottom: 15px; }
 		.stage-item.bottom .stage-date { top: 42%; margin-top: 15px; }
 
-        /* Date Highlight Logic */
         .timeline-stages:has(.stage-item:nth-child(1):hover) .stage-item:nth-child(1) .stage-date,
         .timeline-stages:has(.stage-item:nth-child(2):hover) .stage-item:nth-child(-n+2) .stage-date,
         .timeline-stages:has(.stage-item:nth-child(3):hover) .stage-item:nth-child(-n+3) .stage-date,
@@ -319,7 +319,6 @@
             transform: translateX(-50%) scale(1.1);
         }
 
-        /* --- BOX EXPANSION FIXES --- */
         .stage-box {
             background: #0d0d0d;
             border: 1px solid #222;
@@ -332,20 +331,17 @@
             box-sizing: border-box;
         }
 
-        /* Origin points for expansion */
         .stage-item.top .stage-box { transform-origin: top; }
         .stage-item.bottom .stage-box { transform-origin: bottom; }
 
-        /* Hover Expansion State */
         .stage-item:hover .stage-box { 
-            transform: scale(1.15); /* Expand outward */
-            z-index: 50; /* Ensure it pops above everything */
+            transform: scale(1.15); 
+            z-index: 50; 
             background: #111;
             border-color: var(--Ichorous-red);
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 20px rgba(178, 34, 34, 0.2);
         }
 
-        /* Progress Highlight Logic */
         .timeline-stages:has(.stage-item:nth-child(1):hover) .stage-item:nth-child(1) .cardinal-connector,
         .timeline-stages:has(.stage-item:nth-child(2):hover) .stage-item:nth-child(-n+2) .cardinal-connector,
         .timeline-stages:has(.stage-item:nth-child(3):hover) .stage-item:nth-child(-n+3) .cardinal-connector,
@@ -372,8 +368,7 @@
         .roadmap-list li { color: #888; font-size: 0.75rem; margin-bottom: 8px; padding-left: 20px; position: relative; }
         .roadmap-list li::before { content: "•"; color: var(--Ichorous-red); position: absolute; left: 0; }
 
-        /* GREEN CHECKMARK OVERRIDE */
-        .roadmap-list li.done { color: #555; } /* Completed items text */
+        .roadmap-list li.done { color: #555; }
         .roadmap-list li.done::before { 
             content: "✓"; 
             color: var(--success-green); 
@@ -422,6 +417,17 @@
             text-transform: uppercase;
         }
 
+        /* --- LEADERBOARD STYLE --- */
+        #leaderboard { background: #080808; padding: 100px 0; min-height: auto; }
+        .lb-container { max-width: 1100px; width: 95%; margin: 0 auto; background: rgba(255,255,255,0.01); border: 1px solid #151515; padding: 30px; box-sizing: border-box; position: relative; }
+        .lb-table { width: 100%; border-collapse: collapse; text-align: left; letter-spacing: 1px; }
+        .lb-table thead tr { border-bottom: 2px solid var(--Ichorous-red); color: var(--Ichorous-red); text-transform: uppercase; font-size: 0.75rem; }
+        .lb-table th { padding: 20px 15px; font-weight: 800; }
+        .lb-table td { padding: 18px 15px; color: #888; font-size: 0.85rem; border-bottom: 1px solid #111; transition: 0.3s; }
+        .lb-row:hover td { background: rgba(178, 34, 34, 0.05); color: #fff; border-bottom-color: var(--Ichorous-red); }
+        .lb-warrior { color: #eee; font-weight: bold; }
+        .lb-souls { color: var(--success-green); font-weight: bold; }
+
         #about { background: #0a0a0a; }
         .about-container { max-width: 800px; text-align: center; }
         .about-container p { line-height: 1.8; color: #999; font-size: 1rem; margin-bottom: 25px; }
@@ -439,6 +445,10 @@
             .timeline-stages { flex-direction: column; gap: 30px; }
             .stage-item { width: 100%; padding: 0 !important; margin: 0 !important; }
             .stage-box { transform: none !important; }
+            .lb-table thead { display: none; }
+            .lb-table tr { display: block; margin-bottom: 20px; border: 1px solid #222; padding: 10px; }
+            .lb-table td { display: block; text-align: right; padding: 10px; border: none; }
+            .lb-table td::before { content: attr(data-label); float: left; text-transform: uppercase; font-size: 0.7rem; color: var(--Ichorous-red); }
         }
 
     </style>
@@ -454,6 +464,7 @@
             <a href="#home">Home</a>
             <a href="#the-game">The Game</a>
             <a href="#roadmap">Roadmap</a>
+            <a href="#leaderboard">Leaderboard</a>
             <a href="#about">About Us</a>
             <a href="https://x.com/KnightSlash_Dev" target="_blank">News</a>
         </div>
@@ -590,7 +601,7 @@
                             <li class="done">Shrines & Chest Spawns</li>
                             <li>Godpowers</li>
                             <li>Elite/Armoured/Boss Hostile Units</li>
-                            <li>Leaderboard Integration</li>
+                            <li class="done">Leaderboard Integration</li>
                         </ul>
                     </div>
                     <div class="cardinal-connector"></div>
@@ -648,6 +659,26 @@
         <p class="roadmap-footer-text">Technical Excellence • Performance Driven</p>
     </section>
 
+    <section id="leaderboard">
+        <h2 class="section-title">Hall of Heroes</h2>
+        <div class="lb-container">
+            <table class="lb-table">
+                <thead>
+                    <tr>
+                        <th>Vessel</th>
+                        <th>Wave</th>
+                        <th>Kills</th>
+                        <th>Souls Freed</th>
+                        <th>Match Time</th>
+                    </tr>
+                </thead>
+                <tbody id="lb-data">
+                    <tr><td colspan="5" style="text-align:center; padding:50px;">Consulting the Oracle...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <section id="about">
         <h2 class="section-title">KnightSlash Studios</h2>
         <div class="about-container">
@@ -675,6 +706,39 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Credentials from your provided screenshots
+        const SUPABASE_URL = 'https://zcuenbzhetnvvkqzjigh.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_gKPfkCMgR7tW2EKRfgTtTg_ZHudf...'; // Use your full anon key here
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function fetchRecords() {
+            const { data, error } = await _supabase
+                .from('leaderboard')
+                .select('*')
+                .order('wave', { ascending: false })
+                .limit(10);
+
+            if (error) {
+                console.error("Database Error:", error);
+                return;
+            }
+
+            const tbody = document.getElementById('lb-data');
+            tbody.innerHTML = data.map(row => `
+                <tr class="lb-row">
+                    <td class="lb-warrior" data-label="Warrior">${row.player_name}</td>
+                    <td data-label="Wave">${row.wave}</td>
+                    <td data-label="Kills">${row.kills.toLocaleString()}</td>
+                    <td class="lb-souls" data-label="Souls">${row.souls_earned.toLocaleString()}</td>
+                    <td data-label="Time">${Math.floor(row.match_time_seconds / 60)}m ${Math.floor(row.match_time_seconds % 60)}s</td>
+                </tr>
+            `).join('');
+        }
+
+        fetchRecords();
+    </script>
 
 </body>
 </html>
