@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="google-site-verification" content="x9DS0pX53qibEgfbBLbspsaioaWbeg-2XUzvVoa1pQ0" />
-	
-	<link rel="icon" type="image/png" href="KnightSlashLogo.png">
+    <link rel="icon" type="image/png" href="KnightSlashLogo.png">
 
     <title>KnightSlash Studios™ | Vessels of Ichorous™</title>
     <meta name="description" content="Official site of KnightSlash Studios. Defend the World-Anchor in Vessels of Ichorous™, a mass-scale RTS Roguelike survival game. Solo indie developer reviving classic RTS depth.">
@@ -75,7 +74,6 @@
         }
         .nav-links a:hover { color: var(--Ichorous-red); }
 
-        /* UPDATED FOOTER (only change): layout + links */
         footer {
             position: relative;
             width: 100%;
@@ -188,60 +186,251 @@
             max-width: 700px;
         }
 
-        /* ROADMAP STYLING */
-        #roadmap { background: #050505; }
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            width: 100%;
+        /* --- ROADMAP --- */
+        #roadmap { 
+            background: #050505; 
+            padding: 100px 0; 
+            min-height: auto; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .roadmap-category {
+
+        .timeline-wrap {
+            position: relative;
+            width: 95%;
+            max-width: 1300px;
+            height: 900px; 
+            margin: 60px auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-main-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #222;
+            transform: translateY(-50%);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .timeline-main-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%; width: 100%;
+            background: var(--Ichorous-red);
+            transform: translateX(-100%);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 0 15px var(--Ichorous-red);
+        }
+
+        /* Highlight Logic for Dates and Lines */
+        .timeline-stages:has(.stage-item:nth-child(1):hover) ~ .timeline-main-line::after { transform: translateX(-90%); }
+        .timeline-stages:has(.stage-item:nth-child(2):hover) ~ .timeline-main-line::after { transform: translateX(-70%); }
+        .timeline-stages:has(.stage-item:nth-child(3):hover) ~ .timeline-main-line::after { transform: translateX(-50%); }
+        .timeline-stages:has(.stage-item:nth-child(4):hover) ~ .timeline-main-line::after { transform: translateX(-30%); }
+        .timeline-stages:has(.stage-item:nth-child(5):hover) ~ .timeline-main-line::after { transform: translateX(0%); }
+
+        .timeline-stopper {
+            position: absolute;
+            right: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 60px;
+            background: #333;
+            z-index: 5;
+            transition: 0.4s;
+        }
+
+        .timeline-stopper-label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            color: #444;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.4s;
+        }
+
+        .timeline-stages:has(.stage-item:nth-child(5):hover) ~ .timeline-stopper {
+            background: var(--Ichorous-red);
+            box-shadow: 0 0 15px var(--Ichorous-red);
+        }
+        .timeline-stages:has(.stage-item:nth-child(5):hover) ~ .timeline-stopper .timeline-stopper-label {
+            color: var(--Ichorous-red);
+        }
+
+        .timeline-stages {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage-item {
+            width: 19%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stage-item.top { justify-content: flex-end; padding-bottom: 550px; }
+        .stage-item.bottom { justify-content: flex-start; padding-top: 550px; }
+
+        .stage-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.25rem;
+            letter-spacing: 4px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 800;
+            transition: 0.4s;
+            z-index: 15;
+            white-space: nowrap;
+        }
+        
+		.stage-item.top .stage-date { bottom: 42%; margin-bottom: 15px; }
+		.stage-item.bottom .stage-date { top: 42%; margin-top: 15px; }
+
+        /* Date Highlight Logic */
+        .timeline-stages:has(.stage-item:nth-child(1):hover) .stage-item:nth-child(1) .stage-date,
+        .timeline-stages:has(.stage-item:nth-child(2):hover) .stage-item:nth-child(-n+2) .stage-date,
+        .timeline-stages:has(.stage-item:nth-child(3):hover) .stage-item:nth-child(-n+3) .stage-date,
+        .timeline-stages:has(.stage-item:nth-child(4):hover) .stage-item:nth-child(-n+4) .stage-date,
+        .timeline-stages:has(.stage-item:nth-child(5):hover) .stage-item:nth-child(-n+5) .stage-date {
+            color: var(--Ichorous-red);
+            text-shadow: 0 0 15px rgba(178, 34, 34, 0.8);
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        /* --- BOX EXPANSION FIXES --- */
+        .stage-box {
             background: #0d0d0d;
             border: 1px solid #222;
-            padding: 30px;
-            transition: 0.3s;
-        }
-        .roadmap-category:hover { border-color: #444; }
-        .roadmap-category h3 { 
-            color: var(--Ichorous-red); 
-            font-size: 0.9rem; 
-            letter-spacing: 3px; 
-            text-transform: uppercase; 
-            margin-bottom: 20px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 10px;
-        }
-        .roadmap-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-        .roadmap-list li {
-            color: #777;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-            padding-left: 15px;
+            padding: 20px;
+            width: 100%;
+            margin: 0 auto;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s, background 0.4s, box-shadow 0.4s;
             position: relative;
+            z-index: 5;
+            box-sizing: border-box;
         }
-        .roadmap-list li::before {
-            content: "•";
-            color: var(--Ichorous-red);
+
+        /* Origin points for expansion */
+        .stage-item.top .stage-box { transform-origin: top; }
+        .stage-item.bottom .stage-box { transform-origin: bottom; }
+
+        /* Hover Expansion State */
+        .stage-item:hover .stage-box { 
+            transform: scale(1.15); /* Expand outward */
+            z-index: 50; /* Ensure it pops above everything */
+            background: #111;
+            border-color: var(--Ichorous-red);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 20px rgba(178, 34, 34, 0.2);
+        }
+
+        /* Progress Highlight Logic */
+        .timeline-stages:has(.stage-item:nth-child(1):hover) .stage-item:nth-child(1) .cardinal-connector,
+        .timeline-stages:has(.stage-item:nth-child(2):hover) .stage-item:nth-child(-n+2) .cardinal-connector,
+        .timeline-stages:has(.stage-item:nth-child(3):hover) .stage-item:nth-child(-n+3) .cardinal-connector,
+        .timeline-stages:has(.stage-item:nth-child(4):hover) .stage-item:nth-child(-n+4) .cardinal-connector,
+        .timeline-stages:has(.stage-item:nth-child(5):hover) .stage-item:nth-child(-n+5) .cardinal-connector {
+            background: var(--Ichorous-red);
+        }
+
+        .timeline-stages:has(.stage-item:nth-child(1):hover) .stage-item:nth-child(1) .timeline-node,
+        .timeline-stages:has(.stage-item:nth-child(2):hover) .stage-item:nth-child(-n+2) .timeline-node,
+        .timeline-stages:has(.stage-item:nth-child(3):hover) .stage-item:nth-child(-n+3) .timeline-node,
+        .timeline-stages:has(.stage-item:nth-child(4):hover) .stage-item:nth-child(-n+4) .timeline-node,
+        .timeline-stages:has(.stage-item:nth-child(5):hover) .stage-item:nth-child(-n+5) .timeline-node {
+            border-color: var(--Ichorous-red);
+            background: var(--Ichorous-red);
+            box-shadow: 0 0 15px var(--Ichorous-red);
+        }
+
+        .verse-tag { display: block; font-size: 0.6rem; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px; }
+        .stage-box h3 { color: var(--Ichorous-red); font-size: 0.95rem; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 10px 0; }
+        .stage-subtitle { font-size: 0.75rem; color: #888; font-style: italic; margin-bottom: 15px; display: block; }
+
+        .roadmap-list { list-style: none; padding: 0; margin: 0; }
+        .roadmap-list li { color: #666; font-size: 0.75rem; margin-bottom: 8px; padding-left: 15px; position: relative; }
+        .roadmap-list li::before { content: "•"; color: var(--Ichorous-red); position: absolute; left: 0; }
+
+        .cardinal-connector {
             position: absolute;
-            left: 0;
+            width: 1px;
+            background: #333;
+            left: 50%;
+            z-index: 2;
+            transition: 0.4s;
+        }
+
+        .stage-item.top .cardinal-connector { bottom: 50%; height: 250px; }
+        .stage-item.bottom .cardinal-connector { top: 50%; height: 250px; }
+
+        .timeline-node {
+            width: 12px;
+            height: 12px;
+            background: #050505;
+            border: 1px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10; 
+            transition: 0.4s;
+        }
+
+        .milestone .timeline-node {
+            border-radius: 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 14px;
+            height: 14px;
+        }
+
+        .roadmap-footer-text {
+            margin-top: 80px; 
+            text-align:center; 
+            color: #444; 
+            font-size: 0.75rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase;
         }
 
         #about { background: #0a0a0a; }
         .about-container { max-width: 800px; text-align: center; }
-        .about-container p { line-height: 1.8; color: #999; font-size: 1rem; }
+        .about-container p { line-height: 1.8; color: #999; font-size: 1rem; margin-bottom: 25px; }
+        .about-container strong { color: #eee; }
 
         .btn-group { display: flex; gap: 20px; justify-content: center; }
         .btn { padding: 14px 30px; text-transform: uppercase; text-decoration: none; letter-spacing: 2px; font-weight: bold; transition: 0.4s; border: 1px solid #333; color: white; font-size: 0.8rem; }
         .btn-main { background: var(--Ichorous-red); border-color: var(--Ichorous-red); }
         .btn-main:hover { background: #8b0000; box-shadow: 0 0 20px rgba(178, 34, 34, 0.4); }
         .btn-alt:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+
+        @media (max-width: 1000px) {
+            .timeline-main-line, .cardinal-connector, .timeline-node, .timeline-stopper, .stage-date { display: none; }
+            .timeline-wrap { min-height: auto; margin: 40px auto; width: 95%; height: auto; }
+            .timeline-stages { flex-direction: column; gap: 30px; }
+            .stage-item { width: 100%; padding: 0 !important; margin: 0 !important; }
+            .stage-box { transform: none !important; }
+        }
 
     </style>
 </head>
@@ -298,7 +487,7 @@
                 <h3>Vessel Ranking</h3>
                 <p>Your deeds are etched in Helios. Compete for dominance on the global leaderboards by freeing the highest tally of Souls before the island is consumed.</p>
             </div>
-			<div class="pillar">
+            <div class="pillar">
                 <h3>Defeat a God</h3>
                 <p>Break the cycle. Slay Acheron’s lieutenants to open the path to the Underworld’s heart. Only by defeating the God of the Tide can you truly save the world from the abyss.</p>
             </div>
@@ -333,43 +522,122 @@
 
     <section id="roadmap">
         <h2 class="section-title">Development Roadmap</h2>
-        <div class="roadmap-grid">
+        
+        <div class="timeline-wrap">
             
-            <div class="roadmap-category">
-                <h3>Core Architecture</h3>
-                <ul class="roadmap-list">
-                    <li>Unit Movement & Formations ✓</li>
-                    <li>Local Avoidance Systems ✓</li>
-                    <li>Hostile Unit AI Brain ✓</li>
-                    <li>Worldgen V2 Improvements ✓</li>
-                    <li>Better Performance & Optimization</li>
-                </ul>
+            <div class="timeline-stages">
+                
+                <div class="stage-item top">
+                    <div class="stage-box">
+                        <span class="verse-tag">Phase I</span>
+                        <h3>Foundations</h3>
+                        <span class="stage-subtitle">Core Architecture & Engine Foundation</span>
+                        <ul class="roadmap-list">
+                            <li>✓ Deterministic Island Generation</li>
+                            <li>✓ Resource Gathering & Management</li>
+                            <li>✓ Player and Hostile AI Architecture</li>
+                            <li>✓ Building System</li>
+                            <li>✓ Unit Production System</li>
+                            <li>✓ Basic Melee & Ranged Combat Systems</li>
+                            <li>✓ Selecton/Command Controller</li>
+                            <li>✓ Unit Local Avoidance Systems</li>
+                        </ul>
+                    </div>
+                    <div class="cardinal-connector"></div>
+                    <span class="stage-date">COMPLETED</span>
+                    <div class="timeline-node"></div>
+                </div>
+
+                <div class="stage-item bottom">
+                    <div class="timeline-node"></div>
+                    <span class="stage-date">COMPLETED</span>
+                    <div class="cardinal-connector"></div>
+                    <div class="stage-box">
+                        <span class="verse-tag">Phase II</span>
+                        <h3>Core</h3>
+                        <span class="stage-subtitle">Dynamic Gameplay Systems</span>
+                        <ul class="roadmap-list">
+                            <li>✓ Fog of War</li>
+                            <li>✓ Day & Night Cycle</li>
+                            <li>✓ Ascension System (Match Progression)</li>
+                            <li>✓ Combat and ability Stats</li>
+                            <li>✓ Hostile Waves & Tiers</li>
+                            <li>✓ Minimap System</li>
+                            <li>✓ UI & Main Menu</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="stage-item top">
+                    <div class="stage-box">
+                        <span class="verse-tag">Phase III</span>
+                        <h3>Progression</h3>
+                        <span class="stage-subtitle">Meta-Progression</span>
+                        <ul class="roadmap-list">
+                            <li>✓ Transcendence Upgrades (Permanent Progression)</li>
+                            <li>✓ EXP & Leveling System</li>
+                            <li>✓ Character Customization</li>
+                            <li>✓ Character Equipment and Weapons</li>
+                            <li>✓ Shrines & Chest Spawns</li>
+                            <li>Godpowers</li>
+                            <li>Elite/Armoured/Boss Hostile Units</li>
+                            <li>Leaderboard Integration</li>
+                        </ul>
+                    </div>
+                    <div class="cardinal-connector"></div>
+                    <span class="stage-date">Q2 2026</span>
+                    <div class="timeline-node"></div>
+                </div>
+
+                <div class="stage-item bottom">
+                    <div class="timeline-node"></div>
+                    <span class="stage-date">Q3 2026</span>
+                    <div class="cardinal-connector"></div>
+                    <div class="stage-box">
+                        <span class="verse-tag">Phase IV</span>
+                        <h3>Gameplay</h3>
+                        <span class="stage-subtitle">Expansion, Progression & More</span>
+                        <ul class="roadmap-list">
+                            <li>More Unit Types (Player and Hostile)</li>
+                            <li>Polish Combat</li>
+                            <li>Polish Movement and Pathfinding</li>
+                            <li>New Biome Archetypes</li>
+                            <li>AI Movement Polish</li>
+                            <li>Animations</li>
+                            <li>SFX & Music</li>
+                            <li>UI Rework & Polish</li>
+                            <li>Added Unit Upgrades</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="stage-item top milestone">
+                    <div class="stage-box">
+                        <span class="verse-tag">Final Phase</span>
+                        <h3>Alpha Testing</h3>
+                        <span class="stage-subtitle">Community stability & balance testing.</span>
+                        <ul class="roadmap-list">
+                            <li>Performance Stress Testing</li>
+                            <li>Closed Feedback Testing (Check discord for infromation)</li>
+                            <li>Bug Squashing & Balancing</li>
+                            <li>More</li>
+                        </ul>
+                    </div>
+                    <div class="cardinal-connector"></div>
+                    <span class="stage-date">Q4 2026</span>
+                    <div class="timeline-node"></div>
+                </div>
+
             </div>
 
-            <div class="roadmap-category">
-                <h3>Gameplay Systems</h3>
-                <ul class="roadmap-list">
-                    <li>Ascension System (In-match Aging) ✓</li>
-                    <li>Horde Movement and Intent</li>
-                    <li>Shrines & Chest Spawns ✓</li>
-                    <li>Godpowers & Divine Abilities</li>
-                    <li>More Unit Varieties</li>
-                </ul>
+            <div class="timeline-main-line"></div>
+            
+            <div class="timeline-stopper">
+                <span class="timeline-stopper-label">Future Plans</span>
             </div>
-
-            <div class="roadmap-category">
-                <h3>Meta & Vessel</h3>
-                <ul class="roadmap-list">
-                    <li>The Eternal Forge ✓</li>
-                    <li>Transcendence Vessel Upgrades ✓</li>
-                    <li>Character Creation ✓</li>
-                    <li>Leaderboard Scoring</li>
-                    <li>Main Menu & UI ✓</li>
-                </ul>
-            </div>
-
         </div>
-        <p style="margin-top: 40px; color: #555; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">Currently targeting V1.0 Alpha Test</p>
+        
+        <p class="roadmap-footer-text">Technical Excellence • Performance Driven</p>
     </section>
 
     <section id="about">
@@ -387,7 +655,6 @@
         </div>
     </section>
 
-    <!-- UPDATED FOOTER (only change): copyright left + links right -->
     <footer>
         <div class="footer-row">
             <div>© 2026 KnightSlash Studios<sup>™</sup>. All rights reserved.</div>
