@@ -422,7 +422,9 @@
         .lb-container { max-width: 1100px; width: 95%; margin: 0 auto; background: rgba(255,255,255,0.01); border: 1px solid #151515; padding: 30px; box-sizing: border-box; position: relative; }
         .lb-table { width: 100%; border-collapse: collapse; text-align: left; letter-spacing: 1px; }
         .lb-table thead tr { border-bottom: 2px solid var(--Ichorous-red); color: var(--Ichorous-red); text-transform: uppercase; font-size: 0.75rem; }
-        .lb-table th { padding: 20px 15px; font-weight: 800; }
+        .lb-table th { padding: 20px 15px; font-weight: 800; transition: background 0.2s; }
+        .lb-table th:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+        .lb-table th span { margin-left: 5px; font-size: 0.7rem; }
         .lb-table td { padding: 18px 15px; color: #888; font-size: 0.85rem; border-bottom: 1px solid #111; transition: 0.3s; }
         .lb-row:hover td { background: rgba(178, 34, 34, 0.05); color: #fff; border-bottom-color: var(--Ichorous-red); }
         .lb-warrior { color: #eee; font-weight: bold; }
@@ -664,16 +666,17 @@
         <div class="lb-container">
             <table class="lb-table">
                 <thead>
-                    <tr>
-                        <th>Vessel</th>
-                        <th>Wave</th>
-                        <th>Kills</th>
-                        <th>Souls Freed</th>
-                        <th>Match Time</th>
+                    <tr style="cursor: pointer;">
+                        <th style="cursor: default;">Rank</th>
+                        <th onclick="toggleSort('player_name')">Vessel <span id="sort-player_name"></span></th>
+                        <th onclick="toggleSort('wave')">Wave <span id="sort-wave">▼</span></th>
+                        <th onclick="toggleSort('kills')">Kills <span id="sort-kills"></span></th>
+                        <th onclick="toggleSort('souls_earned')">Souls Freed <span id="sort-souls_earned"></span></th>
+                        <th onclick="toggleSort('match_time_seconds')">Time <span id="sort-match_time_seconds"></span></th>
                     </tr>
                 </thead>
                 <tbody id="lb-data">
-                    <tr><td colspan="5" style="text-align:center; padding:50px;">Consulting the Oracle...</td></tr>
+                    <tr><td colspan="6" style="text-align:center; padding:50px;">Consulting the Oracle...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -708,37 +711,83 @@
     </footer>
 
     <script>
-        // Credentials from your provided screenshots
-        const SUPABASE_URL = 'https://zcuenbzhetnvvkqzjigh.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_gKPfkCMgR7tW2EKRfgTtTg_ZHudf...'; // Use your full anon key here
+        // Supabase Initialization
+        const SUPABASE_URL = 'https://zcuenbzhetnvvkqzijgh.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjdWVuYnpoZXRudnZrcXppamdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNzM4MDEsImV4cCI6MjA4OTk0OTgwMX0.S6OGTzlEWkxAqpthYy8Mn0PgSzmcxCZNKFRVnxv7dO4'; // Replace with your real anon key
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        async function fetchRecords() {
-            const { data, error } = await _supabase
-                .from('leaderboard')
-                .select('*')
-                .order('wave', { ascending: false })
-                .limit(10);
+        let currentSortCol = 'wave';
+        let currentSortDir = false; // false = descending (highest first)
 
-            if (error) {
-                console.error("Database Error:", error);
-                return;
+        function toggleSort(column) {
+            if (currentSortCol === column) {
+                currentSortDir = !currentSortDir;
+            } else {
+                currentSortCol = column;
+                currentSortDir = false;
             }
-
-            const tbody = document.getElementById('lb-data');
-            tbody.innerHTML = data.map(row => `
-                <tr class="lb-row">
-                    <td class="lb-warrior" data-label="Warrior">${row.player_name}</td>
-                    <td data-label="Wave">${row.wave}</td>
-                    <td data-label="Kills">${row.kills.toLocaleString()}</td>
-                    <td class="lb-souls" data-label="Souls">${row.souls_earned.toLocaleString()}</td>
-                    <td data-label="Time">${Math.floor(row.match_time_seconds / 60)}m ${Math.floor(row.match_time_seconds % 60)}s</td>
-                </tr>
-            `).join('');
+            updateSortIcons();
+            fetchRecords();
         }
 
+        function updateSortIcons() {
+            const columns = ['player_name', 'wave', 'kills', 'souls_earned', 'match_time_seconds'];
+            columns.forEach(col => {
+                const el = document.getElementById(`sort-${col}`);
+                if (col === currentSortCol) {
+                    el.innerText = currentSortDir ? ' ▲' : ' ▼';
+                    el.style.color = 'var(--Ichorous-red)';
+                } else {
+                    el.innerText = '';
+                }
+            });
+        }
+
+        async function fetchRecords() {
+            const tbody = document.getElementById('lb-data');
+            
+            try {
+                const { data, error } = await _supabase
+                    .from('leaderboard')
+                    .select('*')
+                    .order(currentSortCol, { ascending: currentSortDir })
+                    .limit(100);
+
+                if (error) throw error;
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:50px;">The Hall is empty... for now.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = data.map((row, index) => {
+                    const rank = index + 1;
+                    const minutes = Math.floor(row.match_time_seconds / 60);
+                    const seconds = Math.floor(row.match_time_seconds % 60);
+
+                    return `
+                    <tr class="lb-row">
+                        <td style="color:var(--Ichorous-red); font-weight:bold;">#${rank}</td>
+                        <td class="lb-warrior" data-label="Vessel">${row.player_name}</td>
+                        <td data-label="Wave">${row.wave}</td>
+                        <td data-label="Kills">${row.kills.toLocaleString()}</td>
+                        <td class="lb-souls" data-label="Souls">${row.souls_earned.toLocaleString()}</td>
+                        <td data-label="Time">${minutes}m ${seconds}s</td>
+                    </tr>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error("Database Error:", err);
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:50px; color:var(--Ichorous-red);">
+                    The Oracle is silent. (Check Console F12)
+                </td></tr>`;
+            }
+        }
+
+        // Initial Load
+        updateSortIcons();
         fetchRecords();
     </script>
-
 </body>
 </html>
