@@ -75,17 +75,48 @@
         }
         .nav-links a:hover { color: var(--Ichorous-red); }
 
+        /* UPDATED FOOTER (only change): layout + links */
         footer {
             position: relative;
             width: 100%;
             background: #000;
-            padding: 30px;
-            text-align: center;
+            padding: 26px 30px;
             border-top: 1px solid #111;
             font-size: 0.7rem;
             color: #555;
             letter-spacing: 2px;
             z-index: 1000;
+        }
+
+        .footer-row {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            transition: 0.25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--Ichorous-red);
         }
 
         section {
@@ -307,10 +338,10 @@
             <div class="roadmap-category">
                 <h3>Core Architecture</h3>
                 <ul class="roadmap-list">
-                    <li>Unit Movement & Formations</li>
-                    <li>Local Avoidance Systems</li>
-                    <li>Hostile Unit AI Brain</li>
-                    <li>Worldgen V2 Improvements</li>
+                    <li>Unit Movement & Formations ✓</li>
+                    <li>Local Avoidance Systems ✓</li>
+                    <li>Hostile Unit AI Brain ✓</li>
+                    <li>Worldgen V2 Improvements ✓</li>
                     <li>Better Performance & Optimization</li>
                 </ul>
             </div>
@@ -318,9 +349,9 @@
             <div class="roadmap-category">
                 <h3>Gameplay Systems</h3>
                 <ul class="roadmap-list">
-                    <li>Ascension System (In-match Aging)</li>
+                    <li>Ascension System (In-match Aging) ✓</li>
                     <li>Horde Movement and Intent</li>
-                    <li>Shrines, Relics, & Chest Spawns</li>
+                    <li>Shrines & Chest Spawns ✓</li>
                     <li>Godpowers & Divine Abilities</li>
                     <li>More Unit Varieties</li>
                 </ul>
@@ -329,11 +360,11 @@
             <div class="roadmap-category">
                 <h3>Meta & Vessel</h3>
                 <ul class="roadmap-list">
-                    <li>The Eternal Forge</li>
-                    <li>Transcendence Vessel Upgrades</li>
-                    <li>Character Creation</li>
+                    <li>The Eternal Forge ✓</li>
+                    <li>Transcendence Vessel Upgrades ✓</li>
+                    <li>Character Creation ✓</li>
                     <li>Leaderboard Scoring</li>
-                    <li>Main Menu & UI</li>
+                    <li>Main Menu & UI ✓</li>
                 </ul>
             </div>
 
@@ -356,8 +387,18 @@
         </div>
     </section>
 
+    <!-- UPDATED FOOTER (only change): copyright left + links right -->
     <footer>
-        &copy; 2026 KNIGHTSLASH STUDIOS<sup>™</sup>. ALL RIGHTS RESERVED.
+        <div class="footer-row">
+            <div>© 2026 KnightSlash Studios<sup>™</sup>. All rights reserved.</div>
+            <div class="footer-links">
+                <a href="mailto:knightslash.studios@gmail.com">Email</a>
+                <a href="https://discord.com/invite/KJRdmGeHEV" target="_blank" rel="noopener">Discord</a>
+                <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" rel="noopener">YouTube</a>
+                <a href="https://x.com/KnightSlash_DEV" target="_blank" rel="noopener">X</a>
+                <a href="https://gamejolt.com/@KnightSlash_Studios" target="_blank" rel="noopener">Game Jolt</a>
+            </div>
+        </div>
     </footer>
 
 </body>
