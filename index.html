@@ -417,19 +417,127 @@
             text-transform: uppercase;
         }
 
-        /* --- LEADERBOARD STYLE --- */
-        #leaderboard { background: #080808; padding: 100px 0; min-height: auto; }
-        .lb-container { max-width: 1100px; width: 95%; margin: 0 auto; background: rgba(255,255,255,0.01); border: 1px solid #151515; padding: 30px; box-sizing: border-box; position: relative; }
-        .lb-table { width: 100%; border-collapse: collapse; text-align: left; letter-spacing: 1px; }
-        .lb-table thead tr { border-bottom: 2px solid var(--Ichor-red); color: var(--Ichor-red); text-transform: uppercase; font-size: 0.75rem; }
-        .lb-table th { padding: 20px 15px; font-weight: 800; transition: background 0.2s; }
-        .lb-table th:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
-        .lb-table th span { margin-left: 5px; font-size: 0.7rem; }
-        .lb-table td { padding: 18px 15px; color: #888; font-size: 0.85rem; border-bottom: 1px solid #111; transition: 0.3s; }
-        .lb-row:hover td { background: rgba(178, 34, 34, 0.05); color: #fff; border-bottom-color: var(--Ichor-red); }
-        .lb-warrior { color: #eee; font-weight: bold; }
-        .lb-souls { color: var(--success-green); font-weight: bold; }
+        /* ═══════════════════════════════════════════════════════════
+           LEADERBOARD
+        ═══════════════════════════════════════════════════════════ */
+        #leaderboard {
+            background: #080808;
+            padding: 100px 0;
+            min-height: auto;
+        }
 
+        .lb-container {
+            max-width: 1100px;
+            width: 95%;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid #151515;
+            padding: 30px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* ── Difficulty tabs ── */
+        .lb-diff-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 20px;
+        }
+
+        .lb-diff-tab {
+            background: transparent;
+            border: 1px solid #2a2a2a;
+            color: #555;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.72rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 9px 18px;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .lb-diff-tab:hover {
+            border-color: #555;
+            color: #aaa;
+        }
+
+        .lb-diff-tab.active {
+            border-color: var(--Ichor-red);
+            color: #fff;
+            background: rgba(178, 34, 34, 0.08);
+        }
+
+        /* Per-difficulty accent colours on active tab */
+        .lb-diff-tab.active[data-diff="Easy"]      { border-color: #2ecc71; color: #2ecc71; background: rgba(46,204,113,0.06); }
+        .lb-diff-tab.active[data-diff="Normal"]    { border-color: #4e9af1; color: #4e9af1; background: rgba(78,154,241,0.06); }
+        .lb-diff-tab.active[data-diff="Hard"]      { border-color: #e67e22; color: #e67e22; background: rgba(230,126,34,0.06); }
+        .lb-diff-tab.active[data-diff="Expert"]    { border-color: var(--Ichor-red); color: var(--Ichor-red); background: rgba(178,34,34,0.08); }
+        .lb-diff-tab.active[data-diff="Nightmare"] { border-color: #8b00ff; color: #b44fff; background: rgba(139,0,255,0.08); }
+
+        /* Difficulty badge pill inside each table row */
+        .diff-badge {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border: 1px solid currentColor;
+            border-radius: 2px;
+        }
+        .diff-badge.Easy      { color: #2ecc71; }
+        .diff-badge.Normal    { color: #4e9af1; }
+        .diff-badge.Hard      { color: #e67e22; }
+        .diff-badge.Expert    { color: var(--Ichor-red); }
+        .diff-badge.Nightmare { color: #b44fff; }
+
+        /* ── Table ── */
+        .lb-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            letter-spacing: 1px;
+        }
+
+        .lb-table thead tr {
+            border-bottom: 2px solid var(--Ichor-red);
+            color: var(--Ichor-red);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .lb-table th {
+            padding: 20px 15px;
+            font-weight: 800;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .lb-table th:first-child { cursor: default; }
+
+        .lb-table th:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        .lb-table th span   { margin-left: 5px; font-size: 0.7rem; }
+        .lb-table td        { padding: 18px 15px; color: #888; font-size: 0.85rem; border-bottom: 1px solid #111; transition: 0.3s; }
+        .lb-row:hover td    { background: rgba(178,34,34,0.05); color: #fff; border-bottom-color: var(--Ichor-red); }
+        .lb-warrior         { color: #eee; font-weight: bold; }
+        .lb-souls           { color: var(--success-green); font-weight: bold; }
+
+        /* loading / empty state */
+        .lb-status-row td {
+            text-align: center;
+            padding: 50px;
+            color: #444;
+            font-style: italic;
+            letter-spacing: 2px;
+        }
+
+        /* ── About ── */
         #about { background: #0a0a0a; }
         .about-container { max-width: 800px; text-align: center; }
         .about-container p { line-height: 1.8; color: #999; font-size: 1rem; margin-bottom: 25px; }
@@ -438,21 +546,25 @@
         .btn-group { display: flex; gap: 20px; justify-content: center; }
         .btn { padding: 14px 30px; text-transform: uppercase; text-decoration: none; letter-spacing: 2px; font-weight: bold; transition: 0.4s; border: 1px solid #333; color: white; font-size: 0.8rem; }
         .btn-main { background: var(--Ichor-red); border-color: var(--Ichor-red); }
-        .btn-main:hover { background: #8b0000; box-shadow: 0 0 20px rgba(178, 34, 34, 0.4); }
+        .btn-main:hover { background: #8b0000; box-shadow: 0 0 20px rgba(178,34,34,0.4); }
         .btn-alt:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
+        /* ── Mobile ── */
         @media (max-width: 1000px) {
             .timeline-main-line, .cardinal-connector, .timeline-node, .timeline-stopper, .stage-date { display: none; }
             .timeline-wrap { min-height: auto; margin: 40px auto; width: 95%; height: auto; }
             .timeline-stages { flex-direction: column; gap: 30px; }
             .stage-item { width: 100%; padding: 0 !important; margin: 0 !important; }
             .stage-box { transform: none !important; }
+
+            .lb-diff-tabs { gap: 6px; }
+            .lb-diff-tab  { padding: 7px 12px; font-size: 0.65rem; letter-spacing: 2px; }
+
             .lb-table thead { display: none; }
-            .lb-table tr { display: block; margin-bottom: 20px; border: 1px solid #222; padding: 10px; }
-            .lb-table td { display: block; text-align: right; padding: 10px; border: none; }
+            .lb-table tr    { display: block; margin-bottom: 20px; border: 1px solid #222; padding: 10px; }
+            .lb-table td    { display: block; text-align: right; padding: 10px; border: none; }
             .lb-table td::before { content: attr(data-label); float: left; text-transform: uppercase; font-size: 0.7rem; color: var(--Ichor-red); }
         }
-
     </style>
 </head>
 <body>
@@ -471,7 +583,7 @@
             <a href="https://x.com/KnightSlash_Dev" target="_blank">News</a>
         </div>
         <div class="contact-box">
-            <a href="mailto:knightslash.studios@gmail.com" style="color:white; text-decoration:none; font-size:0.7rem; border:1px solid #333; padding:8px 15px; font-weight: bold; letter-spacing: 1px;">SUPPORT</a>
+            <a href="/cdn-cgi/l/email-protection#12797c7b757a66617e73617a3c616667767b7d6152757f737b7e3c717d7f" style="color:white; text-decoration:none; font-size:0.7rem; border:1px solid #333; padding:8px 15px; font-weight: bold; letter-spacing: 1px;">SUPPORT</a>
         </div>
     </nav>
 
@@ -491,11 +603,11 @@
         <div class="pillars">
             <div class="pillar">
                 <h3>The Solar Ward</h3>
-                <p>Helios grants a two-minute window of divine safety. Direct survivors to harvest vital resources and fortify the World-Anchor’s defenses before the light shatters.</p>
+                <p>Helios grants a two-minute window of divine safety. Direct survivors to harvest vital resources and fortify the World-Anchor's defenses before the light shatters.</p>
             </div>
             <div class="pillar">
                 <h3>The High Tide</h3>
-                <p>As the sea inhales, Acheron’s servants rise. Lead massive-scale RTS battalions in a top-down struggle against thousands of procedural entities across crumbling peaks.</p>
+                <p>As the sea inhales, Acheron's servants rise. Lead massive-scale RTS battalions in a top-down struggle against thousands of procedural entities across crumbling peaks.</p>
             </div>
             <div class="pillar">
                 <h3>Divine Wrath</h3>
@@ -511,7 +623,7 @@
             </div>
             <div class="pillar">
                 <h3>Defeat a God</h3>
-                <p>Break the cycle. Slay Acheron’s lieutenants to open the path to the Underworld’s heart. Only by defeating the God of the Tide can you truly save the world from the abyss.</p>
+                <p>Break the cycle. Slay Acheron's lieutenants to open the path to the Underworld's heart. Only by defeating the God of the Tide can you truly save the world from the abyss.</p>
             </div>
         </div>
     </section>
@@ -639,7 +751,7 @@
                         <span class="stage-subtitle">Community stability & balance testing.</span>
                         <ul class="roadmap-list">
                             <li>Performance Stress Testing</li>
-                            <li>Closed Feedback Testing (Check discord for infromation)</li>
+                            <li>Closed Feedback Testing (Check discord for information)</li>
                             <li>Bug Squashing & Balancing</li>
                             <li>More</li>
                         </ul>
@@ -661,24 +773,41 @@
         <p class="roadmap-footer-text">Technical Excellence • Performance Driven</p>
     </section>
 
+    <!-- ═══════════════════════════════════════════════════════════
+         LEADERBOARD SECTION
+    ═══════════════════════════════════════════════════════════ -->
     <section id="leaderboard">
         <h2 class="section-title">Hall of Heroes</h2>
         <div class="lb-container">
+
+            <!-- Difficulty filter tabs -->
+            <div class="lb-diff-tabs">
+                <button class="lb-diff-tab active" data-diff="All"       onclick="setDifficulty('All')">All Difficulties</button>
+                <button class="lb-diff-tab"         data-diff="Easy"      onclick="setDifficulty('Easy')">Easy</button>
+                <button class="lb-diff-tab"         data-diff="Normal"    onclick="setDifficulty('Normal')">Normal</button>
+                <button class="lb-diff-tab"         data-diff="Hard"      onclick="setDifficulty('Hard')">Hard</button>
+                <button class="lb-diff-tab"         data-diff="Expert"    onclick="setDifficulty('Expert')">Expert</button>
+                <button class="lb-diff-tab"         data-diff="Nightmare" onclick="setDifficulty('Nightmare')">Nightmare</button>
+            </div>
+
+            <!-- Table -->
             <table class="lb-table">
                 <thead>
-                    <tr style="cursor: pointer;">
-                        <th style="cursor: default;">Rank</th>
+                    <tr>
+                        <th style="cursor:default;">Rank</th>
                         <th onclick="toggleSort('player_name')">Vessel <span id="sort-player_name"></span></th>
                         <th onclick="toggleSort('wave')">Wave <span id="sort-wave">▼</span></th>
                         <th onclick="toggleSort('kills')">Kills <span id="sort-kills"></span></th>
                         <th onclick="toggleSort('souls_earned')">Souls Freed <span id="sort-souls_earned"></span></th>
                         <th onclick="toggleSort('match_time_seconds')">Time <span id="sort-match_time_seconds"></span></th>
+                        <th id="th-difficulty" style="cursor:default;">Difficulty</th>
                     </tr>
                 </thead>
                 <tbody id="lb-data">
-                    <tr><td colspan="6" style="text-align:center; padding:50px;">Consulting the Oracle...</td></tr>
+                    <tr class="lb-status-row"><td colspan="7">Consulting the Oracle...</td></tr>
                 </tbody>
             </table>
+
         </div>
     </section>
 
@@ -687,7 +816,7 @@
         <div class="about-container">
             <p>KnightSlash Studios<sup>™</sup> is an independent development house led by a principal developer with over a decade of cross-platform technical experience. Our foundation is built upon ten years of iterative design and systems architecture, with deep expertise spanning <strong>Level Design, Project Management,</strong> and low-level systems programming in <strong>C, Java, and Rust.</strong></p>
             
-            <p>The studio’s technical pedigree is rooted in extensive contributions to the indie and open-source landscapes. This includes professional asset artistry for the Voxel-RPG-MMO <strong>Veloren</strong>, alongside the development of complex systems-modifications for high-fidelity titles including <strong>Arma 3, DayZ, Stonehearth, Minecraft,</strong> and <strong>Stellaris.</strong></p>
+            <p>The studio's technical pedigree is rooted in extensive contributions to the indie and open-source landscapes. This includes professional asset artistry for the Voxel-RPG-MMO <strong>Veloren</strong>, alongside the development of complex systems-modifications for high-fidelity titles including <strong>Arma 3, DayZ, Stonehearth, Minecraft,</strong> and <strong>Stellaris.</strong></p>
             
             <p>Driven by the gold-standard mechanics of the <em>Age of Empires</em> series and the high-performance competitive frameworks of <em>Warcraft</em> and <em>Starcraft</em>, KnightSlash Studios was established to bridge the gap between traditional RTS depth and modern computational scalability.</p>
 
@@ -701,7 +830,7 @@
         <div class="footer-row">
             <div>© 2026 KnightSlash Studios<sup>™</sup>. All rights reserved.</div>
             <div class="footer-links">
-                <a href="mailto:knightslash.studios@gmail.com">Email</a>
+                <a href="/cdn-cgi/l/email-protection#32595c5b555a46415e53415a1c414647565b5d4172555f535b5e1c515d5f">Email</a>
                 <a href="https://discord.com/invite/KJRdmGeHEV" target="_blank" rel="noopener">Discord</a>
                 <a href="https://www.youtube.com/@KnightSlashStudios" target="_blank" rel="noopener">YouTube</a>
                 <a href="https://x.com/KnightSlash_DEV" target="_blank" rel="noopener">X</a>
@@ -710,15 +839,35 @@
         </div>
     </footer>
 
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        // Supabase Initialization
+        // ── Supabase init ──────────────────────────────────────────────────────
         const SUPABASE_URL = 'https://zcuenbzhetnvvkqzijgh.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjdWVuYnpoZXRudnZrcXppamdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNzM4MDEsImV4cCI6MjA4OTk0OTgwMX0.S6OGTzlEWkxAqpthYy8Mn0PgSzmcxCZNKFRVnxv7dO4'; // Replace with your real anon key
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjdWVuYnpoZXRudnZrcXppamdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNzM4MDEsImV4cCI6MjA4OTk0OTgwMX0.S6OGTzlEWkxAqpthYy8Mn0PgSzmcxCZNKFRVnxv7dO4';
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        let currentSortCol = 'wave';
-        let currentSortDir = false; // false = descending (highest first)
+        // ── State ──────────────────────────────────────────────────────────────
+        let currentSortCol  = 'wave';
+        let currentSortDir  = false;          // false = descending (highest first)
+        let currentDifficulty = 'All';        // 'All' | 'Easy' | 'Normal' | 'Hard' | 'Expert' | 'Nightmare'
 
+        // ── Difficulty tab switch ──────────────────────────────────────────────
+        function setDifficulty(diff) {
+            currentDifficulty = diff;
+
+            // Update tab highlight
+            document.querySelectorAll('.lb-diff-tab').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.diff === diff);
+            });
+
+            // Hide the Difficulty column when a specific tab is active (redundant info)
+            const thDiff = document.getElementById('th-difficulty');
+            if (thDiff) thDiff.style.display = (diff === 'All') ? '' : 'none';
+
+            fetchRecords();
+        }
+
+        // ── Sort toggle ────────────────────────────────────────────────────────
         function toggleSort(column) {
             if (currentSortCol === column) {
                 currentSortDir = !currentSortDir;
@@ -734,6 +883,7 @@
             const columns = ['player_name', 'wave', 'kills', 'souls_earned', 'match_time_seconds'];
             columns.forEach(col => {
                 const el = document.getElementById(`sort-${col}`);
+                if (!el) return;
                 if (col === currentSortCol) {
                     el.innerText = currentSortDir ? ' ▲' : ' ▼';
                     el.style.color = 'var(--Ichor-red)';
@@ -743,51 +893,66 @@
             });
         }
 
+        // ── Fetch & render ─────────────────────────────────────────────────────
         async function fetchRecords() {
             const tbody = document.getElementById('lb-data');
-            
+            tbody.innerHTML = '<tr class="lb-status-row"><td colspan="7">Consulting the Oracle...</td></tr>';
+
             try {
-                const { data, error } = await _supabase
+                let query = _supabase
                     .from('leaderboard')
-                    .select('*')
+                    .select('player_name, difficulty, wave, kills, souls_earned, match_time_seconds')
                     .order(currentSortCol, { ascending: currentSortDir })
                     .limit(100);
 
+                // Apply difficulty filter when a specific tab is selected
+                if (currentDifficulty !== 'All') {
+                    query = query.eq('difficulty', currentDifficulty);
+                }
+
+                const { data, error } = await query;
                 if (error) throw error;
 
-                if (data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:50px;">The Hall is empty... for now.</td></tr>';
+                if (!data || data.length === 0) {
+                    const label = currentDifficulty === 'All' ? '' : ` on ${currentDifficulty}`;
+                    tbody.innerHTML = `<tr class="lb-status-row"><td colspan="7">No warriors have fallen${label}... yet.</td></tr>`;
                     return;
                 }
 
-                tbody.innerHTML = data.map((row, index) => {
-                    const rank = index + 1;
-                    const minutes = Math.floor(row.match_time_seconds / 60);
-                    const seconds = Math.floor(row.match_time_seconds % 60);
+                const showDiffCol = (currentDifficulty === 'All');
+
+                tbody.innerHTML = data.map((row, i) => {
+                    const rank    = i + 1;
+                    const mins    = Math.floor(row.match_time_seconds / 60);
+                    const secs    = Math.floor(row.match_time_seconds % 60);
+                    const diff    = row.difficulty || 'Normal';
+                    const diffCell = showDiffCol
+                        ? `<td data-label="Difficulty"><span class="diff-badge ${diff}">${diff}</span></td>`
+                        : '';
 
                     return `
                     <tr class="lb-row">
-                        <td style="color:var(--Ichor-red); font-weight:bold;">#${rank}</td>
-                        <td class="lb-warrior" data-label="Vessel">${row.player_name}</td>
+                        <td style="color:var(--Ichor-red);font-weight:bold;">#${rank}</td>
+                        <td class="lb-warrior" data-label="Vessel">${row.player_name || '—'}</td>
                         <td data-label="Wave">${row.wave}</td>
-                        <td data-label="Kills">${row.kills.toLocaleString()}</td>
-                        <td class="lb-souls" data-label="Souls">${row.souls_earned.toLocaleString()}</td>
-                        <td data-label="Time">${minutes}m ${seconds}s</td>
-                    </tr>
-                    `;
+                        <td data-label="Kills">${(row.kills || 0).toLocaleString()}</td>
+                        <td class="lb-souls" data-label="Souls">${(row.souls_earned || 0).toLocaleString()}</td>
+                        <td data-label="Time">${mins}m ${String(secs).padStart(2,'0')}s</td>
+                        ${diffCell}
+                    </tr>`;
                 }).join('');
 
             } catch (err) {
-                console.error("Database Error:", err);
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:50px; color:var(--Ichor-red);">
-                    The Oracle is silent. (Check Console F12)
+                console.error('Leaderboard error:', err);
+                tbody.innerHTML = `<tr class="lb-status-row"><td colspan="7" style="color:var(--Ichor-red);">
+                    The Oracle is silent. Try again shortly.
                 </td></tr>`;
             }
         }
 
-        // Initial Load
-        updateSortIcons();
+        // ── Boot ───────────────────────────────────────────────────────────────
         fetchRecords();
     </script>
+
 </body>
 </html>
